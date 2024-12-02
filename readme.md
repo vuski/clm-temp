@@ -12,6 +12,14 @@ The data is stored in the Pmtiles format, where the filenames represent Unix tim
 
 Each file contains global data for levels 0 to 5 based on Google Maps XYZ tile standards. Each tile is 32x32 pixels.
 
+### Tile Overlapping for Interpolation
+
+Each tile was expanded to 34x34 pixels by appending one row of adjacent tile pixels along the edges, enabling linear interpolation along the boundaries. For tiles at the edges with no adjacent tiles, the size becomes 33 pixels.
+
+When mapping the tiles, the rendering process must account for the size of 1 pixel in the coordinate system after transformation and clip half of the overlapping area accordingly.
+
+![](./images/tileSpec.png)
+
 ### encoding & decoding
 
 Every PNG tile contains temperature values for both the reference time and three hours later.
